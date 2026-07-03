@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated Agentic SPC manuscript and this repository."
+title: "Agentic SPC Healthcare Reference Prototype"
+version: 0.2.1
+date-released: 2026-07-03
+type: software
+authors:
+  - family-names: Mustafa
+    given-names: Fakhar
+abstract: "Deterministic synthetic reference implementation for risk-adjusted laboratory turnaround-time monitoring with data-quality handling, governance-gated action, and an append-only audit ledger."
+license: MIT

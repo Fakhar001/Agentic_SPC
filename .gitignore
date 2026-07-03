@@ -1,0 +1,27 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Operating-system and editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated synthetic data, figures, databases, and results
+data/*
+!data/.gitkeep
+outputs/*
+!outputs/.gitkeep
+figures/rendered/
+
+# Local secrets
+.env
+*.pem
+*.key
