@@ -1,0 +1,30 @@
+flowchart TB
+    A["Raw Observation or Subgroup"]
+    B["Data Qualification<br/>Eligibility and Provenance Check"]
+    C1["Data-Integrity Event<br/>Quarantine / Verification"]
+    C2["Approved SPC Monitoring"]
+    D["Raw SPC Evidence"]
+    E["Decision-Time Evidence Package<br/>Signal • data quality • context • knowledge • model version"]
+    F["Contextual Validation<br/>Credible • uncertain • context-explained"]
+    G["Priority and Risk Assessment"]
+    H["Proposed Response"]
+    I["Policy and Authorization Gate"]
+    J1["Low-Risk Pre-Authorized Workflow<br/>Notification • additional sampling<br/>SOP retrieval • ticket creation"]
+    J2["Human Review or Escalation<br/>High consequence / uncertainty<br/>policy conflict"]
+    K["Authorized Action and Outcome"]
+    L["Audit Ledger"]
+    M["Controlled Learning<br/>Candidate update • offline validation<br/>governance approval"]
+
+    A --> B
+    B -->|Ineligible record| C1
+    B -->|Eligible data| C2 --> D
+    C1 --> E
+    D --> E
+    E --> F --> G --> H --> I
+    I --> J1
+    I --> J2
+    J1 --> K
+    J2 --> K
+    K --> L
+    L --> M
+    M -. approved deployment only .-> C2
