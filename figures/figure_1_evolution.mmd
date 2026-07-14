@@ -1,0 +1,17 @@
+flowchart LR
+    A["Classical SPC<br/>Control charts and<br/>statistical signal detection"]
+    B["Digitally Connected SPC<br/>Streaming data, sensors,<br/>enterprise integration"]
+    C["ML/AI-Assisted Monitoring<br/>Prediction, anomaly detection,<br/>diagnostic support"]
+    D["Agentic SPC<br/>Governed evidence-to-action<br/>coordination"]
+
+    A --> B --> C --> D
+
+    E["Approved SPC Evidence<br/>Baselines • limits • chart versions"]
+    F["Contextual Validation<br/>Data quality • operating state<br/>approved knowledge"]
+    G["Graduated Authority<br/>Automation • recommendation<br/>escalation • authorization"]
+    H["Traceability and Controlled Learning<br/>Audit records • review • approved updates"]
+
+    E -. retained in .-> D
+    F -. informs .-> D
+    G -. constrains .-> D
+    H -. governs .-> D
