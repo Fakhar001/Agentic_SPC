@@ -1,0 +1,13 @@
+flowchart LR
+    A["1. Analytical and<br/>Monte Carlo Evaluation<br/>ARL • false alarms • detection delay"]
+    B["2. Retrospective Replay<br/>Historical data • expert adjudication<br/>contextual classification"]
+    C["3. Shadow-Mode Deployment<br/>No operational intervention<br/>evidence packages and recommendations"]
+    D["4. Bounded Pilot<br/>Low-risk workflows only<br/>policy and human-factor evaluation"]
+    E["5. Scaled Evaluation<br/>Multi-site comparison<br/>operational outcomes"]
+    F["Revise or Stop<br/>Unsafe false dismissals<br/>policy failures • poor usability"]
+
+    A --> B --> C --> D --> E
+    B -. failure threshold .-> F
+    C -. failure threshold .-> F
+    D -. failure threshold .-> F
+    F -. redesign and revalidation .-> A
