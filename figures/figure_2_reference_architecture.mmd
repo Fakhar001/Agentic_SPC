@@ -1,0 +1,56 @@
+flowchart LR
+    subgraph A["Data Sources and Ingestion"]
+        A1["Industrial Sensors<br/>PLC • SCADA • Vision Systems"]
+        A2["Healthcare and Enterprise Sources<br/>LIMS • EHR • MES • ERP • QMS"]
+        A3["Edge Gateway and Streaming Layer<br/>Secure ingestion • buffering • synchronization"]
+        A1 --> A3
+        A2 --> A3
+    end
+
+    subgraph B["Evidence Generation"]
+        B1["Immutable Raw Data Store"]
+        B2["Data Qualification Gate<br/>Completeness • plausibility • calibration<br/>timestamp • provenance"]
+        B3["Qualified Data"]
+        B4["Approved SPC Execution<br/>Baseline • limits • model registry"]
+        B5["Immutable Raw SPC Signal"]
+        B6["Data-Integrity Event / Quarantine"]
+        B1 --> B2
+        B2 -->|Eligible| B3 --> B4 --> B5
+        B2 -->|Ineligible| B6
+    end
+
+    subgraph C["Agentic Coordination"]
+        C1["Context and Knowledge Retrieval"]
+        C2["Alarm Validation and<br/>Candidate Diagnosis"]
+        C3["Decision Agent"]
+        C4["Governance and<br/>Authorization Gate"]
+        C5["Human Escalation"]
+        C1 --> C2 --> C3 --> C4 --> C5
+    end
+
+    subgraph D["Knowledge and Audit"]
+        D1["Approved Knowledge Repository<br/>SOPs • policies • protocols"]
+        D2["Organizational Memory<br/>Reviewed incidents • outcomes"]
+        D3["Audit and Decision Ledger"]
+        D1 --> C1
+        D2 --> C1
+    end
+
+    subgraph E["Human and Enterprise Response"]
+        E1["Evidence Dashboard"]
+        E2["Human Review and Approval"]
+        E3["Controlled Workflow Action"]
+        E4["MES • ERP • QMS • CMMS • LIMS • EHR"]
+        E1 --> E2 --> E3 --> E4
+    end
+
+    A3 --> B1
+    B5 --> C2
+    B6 --> D3
+    C4 --> E1
+    C5 --> E2
+    E2 --> D3
+    E3 --> D3
+
+    F["Independent Safety Systems<br/>Status and event data only"]
+    F -. no direct control path .-> A3
