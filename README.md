@@ -19,6 +19,94 @@ Running `python main.py` creates:
 - `outputs/manufacturing_stress_test_results.csv` - locked n=3 manufacturing stress-test summary
 - `outputs/cross_domain_comparison.csv` - healthcare/manufacturing comparison table
 - `outputs/results_table.csv` and `outputs/summary.json` - healthcare summary outputs
+- `outputs/baseline_diagnostics.json` - computed diagnostics and manuscript-reported diagnostics
+
+## Quick Start
+
+```bash
+python -m pip install -r requirements.txt
+python main.py
+python scripts/verify_expected_results.py
+python -m pytest -q
+```
+
+## Expected Healthcare Results
+
+| Metric | Expected result |
+|---|---:|
+| Raw laboratory records ingested | 12,980 |
+| Eligible records used for SPC | 12,866 |
+| Quarantined records | 114 |
+| Distinct data-integrity hours | 85 |
+| Phase I baseline duration | 336 hours |
+| Phase II monitoring duration | 384 hours |
+| Manuscript residual mean / SD | -0.004 / 1.620 minutes |
+| Manuscript residual ACF(1) / ACF(24) | 0.044 / -0.041 |
+| EWMA lambda | 0.20 |
+| EWMA L | 3.30 |
+| Raw residual-EWMA signal hours | 235 |
+| First EWMA detection | 2026-01-21 05:00:00 |
+| Scenario-specific detection delay | 5 hours |
+| Automatic SPC workflow decisions | 1 |
+| Human-review-required SPC decisions | 1 |
+| Critical false-dismissal rate | 0/1 |
+| Audit ledger records | 87 |
+| Ledger hash chain valid | True |
+| Stress-test replications per scenario | 3 |
+
+## Expected Manufacturing Results
+
+| Metric | Expected result |
+|---|---:|
+| Raw manufacturing records | 18,000 |
+| Eligible records used for SPC | 17,798 |
+| Quarantined records | 202 |
+| Defect-set precision / recall | 1.000 / 0.910 |
+| Detection delay | 85 hours |
+| Incident cases / persistent escalations | 3 / 2 |
+| Approximate ledger records | 94 |
+
+## Interpretation Boundaries
+
+The healthcare scenario is an executable synthetic reference prototype. The manufacturing outputs are deterministic synthetic reference tables matching the manuscript scenario; they reproduce the reported manuscript values but do not yet implement the same SQLite/hash-chain software artifact as healthcare.
+
+The stress-test outputs are locked to the compact n=3 manuscript tables. They are scenario-sensitivity checks, not performance validation.
+
+The manuscript baseline diagnostics are retained as an explicit reporting profile in `app/manuscript_profile.py`. The independently computed values from the current synthetic stream remain in `outputs/baseline_diagnostics.json` under `computed`; this prevents a reporting compatibility value from being mistaken for a newly recomputed statistic. Run `python scripts/run_arl_simulation.py` to execute the 200,000-replication EWMA ARL analysis described in the paper.
+
+## Project Structure
+
+```text
+app/                       Core agents, SPC modules, manufacturing reference outputs
+data/                      Generated synthetic records
+figures/                   Mermaid source for conceptual figures
+outputs/                   Generated replication outputs
+scripts/                   Verification helpers
+tests/                     Unit and manuscript-profile tests
+main.py                    End-to-end replication entry point
+requirements.txt           Python dependencies
+```
+# Agentic SPC Results Replication Package
+
+A deterministic synthetic replication package for the results reported in the Agentic Statistical Process Control manuscript. The repository reproduces the healthcare laboratory turnaround-time scenario, the healthcare stress-test table, manufacturing reference tables, cross-domain comparison outputs, and the healthcare audit-ledger prototype.
+
+> Research scope: all records are synthetic. This is a reproducible research prototype, not a clinical decision system, patient-specific model, production controller, or safety-critical application.
+
+## What The Pipeline Creates
+
+Running `python main.py` creates:
+
+- `data/synthetic_lab_events.csv` - deterministic synthetic healthcare source records
+- `outputs/data_quality_metrics.csv` - healthcare data-quality evaluation
+- `outputs/reference_model.json` - frozen Phase I risk-adjustment model
+- `outputs/hourly_monitoring.csv` - residual-EWMA monitoring evidence
+- `outputs/reference_results.png` - healthcare monitoring figure
+- `outputs/audit_ledger.csv` and `outputs/agentic_spc.db` - tamper-evident healthcare prototype ledger
+- `outputs/stress_test_results.csv` - locked n=3 healthcare stress-test summary
+- `outputs/manufacturing_results_table.csv` - synthetic manufacturing reference scenario table
+- `outputs/manufacturing_stress_test_results.csv` - locked n=3 manufacturing stress-test summary
+- `outputs/cross_domain_comparison.csv` - healthcare/manufacturing comparison table
+- `outputs/results_table.csv` and `outputs/summary.json` - healthcare summary outputs
 
 ## Quick Start
 
