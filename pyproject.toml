@@ -22,3 +22,27 @@ test = ["pytest>=8.0,<10.0"]
 pythonpath = ["."]
 testpaths = ["tests"]
 addopts = "-q"
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-spc-healthcare-reference"
+version = "0.2.1"
+description = "Deterministic synthetic reference implementation for Agentic Statistical Process Control."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26,<3.0",
+  "pandas>=2.2,<3.0",
+  "matplotlib>=3.8,<4.0",
+]
+
+[project.optional-dependencies]
+dashboard = ["streamlit>=1.35,<2.0"]
+test = ["pytest>=8.0,<10.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
