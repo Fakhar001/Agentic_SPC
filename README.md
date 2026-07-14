@@ -1,4 +1,4 @@
-# Agentic SPC Results Replication Package
+# Agentic SPC Results Package
 
 A deterministic synthetic replication package for the results reported in the Agentic Statistical Process Control manuscript. The repository reproduces the healthcare laboratory turnaround-time scenario, the healthcare stress-test table, manufacturing reference tables, cross-domain comparison outputs, and the healthcare audit-ledger prototype.
 
